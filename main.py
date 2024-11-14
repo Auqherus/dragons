@@ -5,10 +5,12 @@ class Unit:
         self.pos_y = pos_y
 
     def in_area(self, x_1, y_1, x_2, y_2):
-        if self.pos_x >= x_1 and self.pos_x <= x_2 and self.pos_y >= y_1 and self.pos_y <= y_2:
-            return True
-        return False
-
+        return (
+            self.pos_x >= x_1 and
+            self.pos_x <= x_2 and
+            self.pos_y >= y_1 and
+            self.pos_y <= y_2
+        )
 
 class Dragon(Unit):
     def __init__(self, name, pos_x, pos_y, fire_range):
@@ -16,11 +18,13 @@ class Dragon(Unit):
         self.__fire_range = fire_range
 
     def breathe_fire(self, x, y, units):
-        self.fire_blasted = []
+        units_in_blast_range = []
         for unit in units:
-            #print(self.__fire_range)
-            if unit.in_area(x - self.__fire_range, y - self.__fire_range, x + self.__fire_range, y + self.__fire_range):
-                print("#debug: I did this part!")
-                self.fire_blasted.append(unit)
-        return self.fire_blasted
-            
+            #print(f"x:{x},y:{y}")
+            #print(f"unit.pos_x:{unit.pos_x}, unit.pos_y:{unit.pos_y}")
+            #print(f"x - pos_x:{x - unit.pos_x}, y - pos_y:{y - unit.pos_y}")
+            #print(f"x + pos_x:{x + unit.pos_x}, y + pos_y:{y + unit.pos_y}")
+            if unit.in_area(x - self.__fire_range, y - self.__fire_range,
+                            x + self.__fire_range, y + self.__fire_range):
+                units_in_blast_range.append(unit)
+        return units_in_blast_range
