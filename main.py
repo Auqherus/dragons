@@ -28,3 +28,23 @@ class Dragon(Unit):
                             x + self.__fire_range, y + self.__fire_range):
                 units_in_blast_range.append(unit)
         return units_in_blast_range
+
+def main():
+    sheep = Unit('sheep', 3, 2)
+    knight = Unit('knight', 5, 5)
+    villager = Unit('villager', 7, 7)
+    smaug = Dragon('Smaug', 4, 4, 3)
+
+    units = [sheep, knight, villager]
+
+    print(f'Is in area: {sheep.in_area(1,1,4,4)}') # True
+
+    print(f'Total units: {len(units)}\n')
+    for unit in units:
+        print(f'Unit name: {unit.name}, pos_x: {unit.pos_x}, pos_y: {unit.pos_y}')
+    print(f"Units in blast range of Smaug fire breath:\n")
+
+    for unit in smaug.breathe_fire(2,2,units):
+        print(f'{unit.name}')
+
+main()
